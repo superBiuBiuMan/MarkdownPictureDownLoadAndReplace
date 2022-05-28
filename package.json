@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "sleep": "^6.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "assets": "views/**/*",
+    "targets": "node16"
+  }
+}
