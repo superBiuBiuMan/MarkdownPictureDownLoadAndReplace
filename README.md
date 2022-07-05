@@ -21,6 +21,15 @@
 
 ### 具体看源代码吧,我把注释写的挺详细的
 
+## 更新
+
+* 1.1.0发布~
+  * 匹配文件内图片链接的正则变更
+  * 替换文件图片链接不使用正则而使用字符串进行替换
+  * 添加UA访问图片
+  * 保存的文件名称如果没有扩展名,就以时间戳为名称且不添加扩展名(因为md读取的时候即使没有扩展名也可以正常读取)
+* 1.0.0发布~
+
 ## 使用
 
 * **nodejs环境**
@@ -39,11 +48,13 @@
 
 ### 我打包nodejs的一些配置
 
-* 配置了下文件(具体的可以看官网,我这里直接copy了别人的)
+* 然后运行`npm pkg -g` ,然后会下载三个包
+  * `index-linux` `index-macos` `index-win`
+* 配置了下文件(具体的可以看官网,我这里直接copy了别人的) package.json
 
-![image-20220528093533690](README.assets/202205280935788.png)
+![](README.assets/202205280935788.png)
 
-```javascript
+```js
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -54,8 +65,6 @@
   }
 ```
 
-* 然后运行`npm pkg` ,然后会下载三个包
-  * `index-linux` `index-macos` `index-win`
 * 然后生成三个平台的运行文件(可以有配置生成哪一个平台文件,具体看官网就可以~我这里就不研究了)
 
 ![npm pck生成的文件](README.assets/202205280937735.png)
@@ -101,3 +110,5 @@
 ![故意失败测试~防止失败就中断](README.assets/202205281026056.png)
 
 ![使用](README.assets/202205281048486.png)
+
+![使用](https://dreamos.oss-cn-beijing.aliyuncs.com/gitblog/202207051026604.png)

@@ -20,11 +20,9 @@ rl.question('请输入你的文件夹路径', (answer) => {
     if (answer) {
         //获取当前目录下所有的md文件的绝对路径
         allFilePathArray = readAllFileList(answer);
-        // console.log(allFilePathArray);
 
         // 获取当前目录下所有的md文件的链接,
         allFileLinkArray = getAllFileLink([...allFilePathArray]); //注意这里应该是浅拷贝
-        // console.log(allFileLinkArray);
         test();
 
     }
@@ -49,10 +47,6 @@ async function test() {
         //获取  保存图片文件夹的名称
         //C:\Users\Administrator\Desktop\get\file\测试md.assets => C:\Users\Administrator\Desktop\get\file 和 测试md.assets
         let [, dirPath, , newFileName] = fileNameReg.exec(pathf);
-        // console.log("mdFileName",mdFileName);
-        // console.log("dirPath",dirPath);
-        // console.log("newFileName",newFileName);
-        // console.log("pathf",pathf);
         // 建立文件夹
         try {
             fs.openSync(pathf);
@@ -65,10 +59,14 @@ async function test() {
         let link = linkArray.pop();
         while (link) {
             let picName = await completeDown(link, pathf);
+            // console.log("图片链接地址",link);
+            // console.log("文件名",picName);
             if (picName) {
                 // 替换文件内容 并且使用正则全局替换,这样子全部相同的被替换
                 // https://s1.ax1x.com/2022/05/26/XVsG0e.jpg => 测试md.assets/XVsG0e.jpg
-                fileData = fileData.replace(new RegExp(link, "g"), newFileName + "/" + picName);
+                // 替换文件图片链接不使用正则而使用字符串进行替换
+                // fileData = fileData.replaceAll(new RegExp(link, "g"), newFileName + "/" + picName);
+                fileData = fileData.replaceAll(link, newFileName + "/" + picName);
             }
             //接着下一个图片链接
             link = linkArray.pop();
@@ -84,6 +82,6 @@ async function test() {
     } else if (allFileLinkArray.length > 0) {
         test();
     } else {
-        console.log("*************程序全部处理完成,请查看是否有因图床问题导致的保存失败!*************");
+        console.log("*************程序全部处理完成,请查看是否有因图床问题导致的保存失败!或是开启了代理导致的访问失败!*************");
     }
 }
